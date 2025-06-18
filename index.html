@@ -30,6 +30,9 @@
       padding: 20px 0;
       text-align: center;
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     header h1 {
       font-size: 2.5rem;
@@ -37,18 +40,20 @@
       font-weight: 700;
       letter-spacing: 1.5px;
     }
-    header p {
-      font-size: 1.1rem;
-      font-style: italic;
-      opacity: 0.85;
-    }
     nav {
-      margin: 15px 0;
+      margin: 10px 0 0;
       text-align: center;
     }
     nav a {
       margin: 0 15px;
       font-size: 1.1rem;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #1e4e1b;
+      color: white;
     }
 
     .hero {
@@ -63,31 +68,30 @@
       font-weight: 700;
       letter-spacing: 1.2px;
       margin-bottom: 40px;
-    }
-
-    .intro {
-      max-width: 900px;
-      margin: 0 auto 50px;
-      padding: 0 20px;
       text-align: center;
-      font-size: 1.25rem;
-      line-height: 1.5;
-      color: #3a5a33;
+      padding: 0 20px;
     }
 
-    .menu-section {
-      max-width: 1000px;
+    main {
+      max-width: 1100px;
       margin: 0 auto 60px;
       padding: 0 20px;
     }
-    .menu-section h2 {
+
+    section {
+      margin-bottom: 60px;
+    }
+
+    h2 {
       color: #2f6b4a;
-      text-align: center;
-      margin-bottom: 30px;
       font-size: 2rem;
       font-weight: 700;
+      margin-bottom: 25px;
+      text-align: center;
       letter-spacing: 1px;
     }
+
+    /* Menu preview */
     .menu-items {
       display: grid;
       grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
@@ -143,6 +147,54 @@
       background-color: #1e4e1b;
     }
 
+    /* Login/Signup call to actions */
+    .auth-section {
+      text-align: center;
+      font-size: 1.15rem;
+      color: #3a5a33;
+    }
+    .auth-buttons {
+      margin-top: 18px;
+    }
+    .auth-buttons a {
+      display: inline-block;
+      background: #2f6b4a;
+      color: white;
+      padding: 12px 28px;
+      margin: 0 12px;
+      font-weight: 700;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+    }
+    .auth-buttons a:hover {
+      background: #1e4e1b;
+    }
+
+    /* About Us */
+    .about-text {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.15rem;
+      color: #3a5a33;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* Contact teaser */
+    .contact-teaser {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #2f6b4a;
+      font-weight: 600;
+    }
+    .contact-teaser a {
+      font-weight: 700;
+      color: #1e4e1b;
+    }
+    .contact-teaser a:hover {
+      text-decoration: underline;
+    }
+
     footer {
       background-color: #2f6b4a;
       color: white;
@@ -161,6 +213,10 @@
       .menu-items {
         grid-template-columns: 1fr;
       }
+      .auth-buttons a {
+        margin: 8px 10px;
+        padding: 10px 24px;
+      }
     }
   </style>
 </head>
@@ -175,6 +231,7 @@
     <a href="cart.html">Cart</a>
     <a href="booking.html">Booking</a>
     <a href="login.html">Login</a>
+    <a href="signup.html">Sign Up</a>
     <a href="admin.html">Admin</a>
   </nav>
 </header>
@@ -183,23 +240,45 @@
   Freshly Brewed Flavors Await You!
 </section>
 
-<section class="intro">
-  Welcome to Green Sip Café, where we bring you the freshest coffee, delightful snacks, and a cozy ambiance to relax and enjoy. Order online with easy payment options including eSewa, Khalti, or cash on delivery.
-</section>
+<main>
 
-<section class="menu-section">
-  <h2>Featured Menu Items</h2>
-  <div class="menu-items" id="menuItems">
-    <!-- Menu items will be dynamically inserted here by script -->
-  </div>
-</section>
+  <section>
+    <h2>Featured Menu Items</h2>
+    <div class="menu-items" id="menuItems">
+      <!-- Menu items will be dynamically inserted here by script -->
+    </div>
+  </section>
+
+  <section class="auth-section">
+    <h2>Get Started</h2>
+    <p>Login or Sign Up to order your favorite drinks and snacks online with ease.</p>
+    <div class="auth-buttons">
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign Up</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>About Us</h2>
+    <p class="about-text">
+      Green Sip Café is a cozy corner in Kathmandu dedicated to serving the freshest, highest-quality beverages and snacks.
+      We believe in sustainable sourcing, friendly service, and creating a warm space where you can relax and enjoy every sip.
+    </p>
+  </section>
+
+  <section class="contact-teaser">
+    <p>Have questions? <a href="contact.html">Contact us</a> or visit us at Kalanki-14, Kathmandu.</p>
+    <p>Call us: 01-5219858, 52 | Email: cambridge.college.kathmandu@gmail.com</p>
+  </section>
+
+</main>
 
 <footer>
   &copy; 2025 Green Sip Café | All rights reserved
 </footer>
 
 <script>
-  // Sample menu data - replace or fetch dynamically if needed
+  // Sample menu data
   const menu = [
     {
       id: 1,
@@ -221,13 +300,6 @@
       description: 'Freshly baked blueberry muffin.',
       price: 180,
       img: 'https://images.unsplash.com/photo-1562440499-64b0735d2908?auto=format&fit=crop&w=600&q=60'
-    },
-    {
-      id: 4,
-      name: 'Espresso',
-      description: 'Strong and bold espresso shot.',
-      price: 120,
-      img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=60'
     }
   ];
 
@@ -244,16 +316,11 @@
           <h3>${item.name}</h3>
           <p>${item.description}</p>
           <div class="price">NPR ${item.price.toLocaleString()}</div>
-          <button class="add-to-cart-btn" onclick="addToCart(${item.id})">Add to Cart</button>
+          <button class="add-to-cart-btn" onclick="alert('Add to cart for item #' + ${item.id} + ' coming soon!')">Add to Cart</button>
         </div>
       `;
       menuContainer.appendChild(card);
     });
-  }
-
-  function addToCart(id) {
-    alert('Added item #' + id + ' to cart! (Functionality to be implemented)');
-    // Here you would add your real cart logic and storage
   }
 
   renderMenu();
