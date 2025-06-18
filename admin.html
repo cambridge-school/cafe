@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Panel - Green Sip Café</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #e9f5ec;
+      margin: 0;
+      padding: 20px 30px;
+      color: #1b4332;
+    }
+    h1 {
+      text-align: center;
+      color: #2d6a4f;
+      margin-bottom: 30px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 25px 30px;
+      border-radius: 10px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+    }
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px 20px;
+      margin-bottom: 30px;
+    }
+    label {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1.5px solid #95c88d;
+      border-radius: 6px;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    textarea {
+      grid-column: span 2;
+      min-height: 60px;
+    }
+    select {
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1.5px solid #95c88d;
+      font-size: 1rem;
+    }
+    button {
+      grid-column: span 2;
+      padding: 12px;
+      background-color: #40916c;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #2d6a4f;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #95c88d;
+      padding: 12px 15px;
+      text-align: center;
+    }
+    th {
+      background-color: #a5d6a7;
+      color: #1b4332;
+    }
+    img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .action-btn {
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 6px;
+      border: none;
+      font-weight: 600;
+      color: white;
+      margin: 0 5px;
+      transition: background-color 0.3s;
+    }
+    .edit-btn {
+      background-color: #4a90e2;
+    }
+    .edit-btn:hover {
+      background-color: #357abd;
+    }
+    .delete-btn {
+      background-color: #d00000;
+    }
+    .delete-btn:hover {
+      background-color: #a50000;
+    }
+    .logout-btn {
+      margin-top: 15px;
+      background-color: #6a994e;
+      padding: 10px 20px;
+      font-weight: 600;
+      border-radius: 8px;
+      float: right;
+      cursor: pointer;
+      color: white;
+      border: none;
+      transition: background-color 0.3s;
+    }
+    .logout-btn:hover {
+      background-color: #4a7031;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Green Sip Café - Admin Panel</h1>
+    
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+
+    <form id="productForm">
+      <div>
+        <label for="productName">Product Name</label>
+        <input type="text" id="productName" required />
+      </div>
+
+      <div>
+        <label for="productPrice">Price (NPR)</label>
+        <input type="number" id="productPrice" min="1" required />
+      </div>
+
+      <div>
+        <label for="productImage">Image URL</label>
+        <input type="text" id="productImage" placeholder="Paste image URL here" required />
+      </div>
+
+      <div>
+        <label for="productCategory">Category</label>
+        <select id="productCategory" required>
+          <option value="" disabled selected>Select Category</option>
+          <option value="Coffee">Coffee</option>
+          <option value="Tea">Tea</option>
+          <option value="Snacks">Snacks</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div style="grid-column: span 2;">
+        <label for="productDescription">Description</label>
+        <textarea id="productDescription" placeholder="Enter product description" required></textarea>
+      </div>
+
+      <button type="submit">Add Product</button>
+    </form>
+
+    <table id="productTable">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Price (NPR)</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Products will be listed here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Elements
+    const productForm = document.getElementById('productForm');
+    const productTableBody = document.querySelector('#productTable tbody');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // Load products from localStorage or empty array
+    let products = JSON.parse(localStorage.getItem('greenSipProducts')) || [];
+
+    // Render products to table
+    function renderProducts() {
+      productTableBody.innerHTML = '';
+      products.forEach((product, index) => {
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+          <td><img src="${product.image}" alt="${product.name}" /></td>
+          <td>${product.name}</td>
+          <td>रु ${product.price.toFixed(2)}</td>
+          <td>${product.category}</td>
+          <td>${product.description}</td>
+          <td>
+            <button class="action-btn edit-btn" data-index="${index}">Edit</button>
+            <button class="action-btn delete-btn" data-index="${index}">Delete</button>
+          </td>
+        `;
+
+        productTableBody.appendChild(tr);
+      });
+    }
+
+    // Add new product
+    productForm.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const newProduct = {
+        name: productForm.productName.value.trim(),
+        price: parseFloat(productForm.productPrice.value),
+        image: productForm.productImage.value.trim(),
+        category: productForm.productCategory.value,
+        description: productForm.productDescription.value.trim(),
+      };
+
+      products.push(newProduct);
+      localStorage.setItem('greenSipProducts', JSON.stringify(products));
+      renderProducts();
+      productForm.reset();
+    });
+
+    // Handle Edit and Delete buttons
+    productTableBody.addEventListener('click', e => {
+      if (e.target.classList.contains('delete-btn')) {
+        const idx = e.target.dataset.index;
+        if (confirm(`Delete product "${products[idx].name}"?`)) {
+          products.splice(idx, 1);
+          localStorage.setItem('greenSipProducts', JSON.stringify(products));
+          renderProducts();
+        }
+      }
+
+      if (e.target.classList.contains('edit-btn')) {
+        const idx = e.target.dataset.index;
+        const product = products[idx];
+        // Prefill form with product data for editing
+        productForm.productName.value = product.name;
+        productForm.productPrice.value = product.price;
+        productForm.productImage.value = product.image;
+        productForm.productCategory.value = product.category;
+        productForm.productDescription.value = product.description;
+
+        // Change button text to 'Update Product'
+        productForm.querySelector('button[type="submit"]').textContent = 'Update Product';
+
+        // Remove existing submit event to avoid stacking
+        productForm.removeEventListener('submit', addProductHandler);
+
+        // New submit handler for updating product
+        const updateProductHandler = (e) => {
+          e.preventDefault();
+
+          products[idx] = {
+            name: productForm.productName.value.trim(),
+            price: parseFloat(productForm.productPrice.value),
+            image: productForm.productImage.value.trim(),
+            category: productForm.productCategory.value,
+            description: productForm.productDescription.value.trim(),
+          };
+
+          localStorage.setItem('greenSipProducts', JSON.stringify(products));
+          renderProducts();
+          productForm.reset();
+          productForm.querySelector('button[type="submit"]').textContent = 'Add Product';
+
+          // Remove this update handler and re-add the original add handler
+          productForm.removeEventListener('submit', updateProductHandler);
+          productForm.addEventListener('submit', addProductHandler);
+        };
+
+        productForm.addEventListener('submit', updateProductHandler);
+      }
+    });
+
+    // Initial render
+    renderProducts();
+
+    // Add product handler (for adding new products)
+    function addProductHandler(e) {
+      e.preventDefault();
+      const newProduct = {
+        name: productForm.productName.value.trim(),
+        price: parseFloat(productForm.productPrice.value),
+        image: productForm.productImage.value.trim(),
+        category: productForm.productCategory.value,
+        description: productForm.productDescription.value.trim(),
+      };
+
+      products.push(newProduct);
+      localStorage.setItem('greenSipProducts', JSON.stringify(products));
+      renderProducts();
+      productForm.reset();
+    }
+
+    // Attach the initial add handler
+    productForm.addEventListener('submit', addProductHandler);
+
+    // Logout button redirects to login page
+    logoutBtn.addEventListener('click', () => {
+      if (confirm('Are you sure you want to logout?')) {
+        window.location.href = 'login.html';
+      }
+    });
+  </script>
+</body>
+</html>
