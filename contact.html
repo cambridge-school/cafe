@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Green Sip Café - Contact Us</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f9f4;
+      margin: 0; padding: 20px;
+      color: #2a4d25;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #2f6b4a;
+      margin-bottom: 25px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1.8px solid #a9d6a4;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #2a4d25;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    button {
+      background-color: #2f6b4a;
+      color: white;
+      border: none;
+      padding: 14px 0;
+      width: 100%;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #1e4e1b;
+    }
+    .info {
+      margin-bottom: 30px;
+      font-weight: 600;
+      color: #3a6b33;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Contact Us</h1>
+
+    <div class="info">
+      <p><strong>Address:</strong> Kalanki-14, Kathmandu, Nepal</p>
+      <p><strong>Phone:</strong> 01-5219858, 52</p>
+      <p><strong>Email:</strong> cambridge.college.kathmandu@gmail.com</p>
+    </div>
+
+    <form id="contactForm">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" placeholder="Your full name" required />
+
+      <label for="email">Your Email</label>
+      <input type="email" id="email" name="email" placeholder="Your email address" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const form = e.target;
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
+
+      if(!name || !email || !message) {
+        alert('Please fill all the required fields.');
+        return;
+      }
+
+      // Here you can integrate backend or email service to send message
+      alert(`Thank you, ${name}! Your message has been received.`);
+      form.reset();
+    });
+  </script>
+</body>
+</html>
