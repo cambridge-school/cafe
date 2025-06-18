@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Green Sip Café - Table Booking</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f9f4;
+      margin: 0; padding: 20px;
+      color: #2a4d25;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #2f6b4a;
+      margin-bottom: 25px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1.8px solid #a9d6a4;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #2a4d25;
+    }
+    button {
+      background-color: #2f6b4a;
+      color: white;
+      border: none;
+      padding: 14px 0;
+      width: 100%;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #1e4e1b;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Book a Table</h1>
+    <form id="bookingForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="Your full name" required />
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" placeholder="Your phone number" required />
+
+      <label for="date">Booking Date</label>
+      <input type="date" id="date" name="date" required />
+
+      <label for="time">Booking Time</label>
+      <input type="time" id="time" name="time" required />
+
+      <label for="guests">Number of Guests</label>
+      <select id="guests" name="guests" required>
+        <option value="" disabled selected>Select guests</option>
+        <option value="1">1 person</option>
+        <option value="2">2 people</option>
+        <option value="3">3 people</option>
+        <option value="4">4 people</option>
+        <option value="5">5 people</option>
+        <option value="6+">6 or more</option>
+      </select>
+
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const name = form.name.value.trim();
+      const phone = form.phone.value.trim();
+      const date = form.date.value;
+      const time = form.time.value;
+      const guests = form.guests.value;
+
+      if(!name || !phone || !date || !time || !guests) {
+        alert('Please fill all the required fields.');
+        return;
+      }
+
+      // Here you would normally send data to server...
+      alert(`Thank you ${name}, your table booking for ${guests} on ${date} at ${time} is confirmed!`);
+      form.reset();
+    });
+  </script>
+</body>
+</html>
