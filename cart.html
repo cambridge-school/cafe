@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Green Sip Café - Cart</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f9f4;
+      margin: 0; padding: 20px;
+      color: #2a4d25;
+    }
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #2f6b4a;
+      margin-bottom: 25px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 25px;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #a9d6a4;
+    }
+    th {
+      background-color: #d9f0e1;
+    }
+    .total-row {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #1e4e1b;
+    }
+    button {
+      background-color: #2f6b4a;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #1e4e1b;
+    }
+    .empty-cart {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #617d5f;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Your Cart</h1>
+    <table id="cartTable">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price (NPR)</th>
+          <th>Subtotal (NPR)</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Cart rows will go here -->
+      </tbody>
+      <tfoot>
+        <tr class="total-row">
+          <td colspan="3">Total</td>
+          <td id="totalAmount">0</td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div id="emptyMessage" class="empty-cart" style="display:none;">Your cart is empty.</div>
+
+    <button id="checkoutBtn" onclick="goToCheckout()">Proceed to Checkout</button>
+  </div>
+
+  <script>
+    // Sample cart data - Replace with real data / storage as needed
+    let cart = [
+      { id: 1, name: 'Green Tea', price: 150, quantity: 2 },
+      { id: 2, name: 'Cappuccino', price: 250, quantity: 1 },
+      { id: 3, name: 'Blueberry Muffin', price: 180, quantity: 3 },
+    ];
+
+    const cartTableBody = document.querySelector('#cartTable tbody');
+    const totalAmountEl = document.getElementById('totalAmount');
+    const emptyMessageEl = document.getElementById('emptyMessage');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    function renderCart() {
+      cartTableBody.innerHTML = '';
+      if(cart.length === 0) {
+        emptyMessageEl.style.display = 'block';
+        checkoutBtn.style.display = 'none';
+        return;
+      } else {
+        emptyMessageEl.style.display = 'none';
+        checkoutBtn.style.display = 'inline-block';
+      }
+
+      let total = 0;
+      cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${item.name}</td>
+          <td>
+            <input type="number" min="1" value="${item.quantity}" onchange="updateQuantity(${item.id}, this.value)" />
+          </td>
+          <td>${item.price.toLocaleString()}</td>
+          <td>${subtotal.toLocaleString()}</td>
+          <td><button onclick="removeItem(${item.id})">Remove</button></td>
+        `;
+        cartTableBody.appendChild(row);
+      });
+      totalAmountEl.textContent = total.toLocaleString();
+    }
+
+    function updateQuantity(id, qty) {
+      qty = parseInt(qty);
+      if(qty < 1) return;
+      const item = cart.find(p => p.id === id);
+      if(item) {
+        item.quantity = qty;
+        renderCart();
+      }
+    }
+
+    function removeItem(id) {
+      cart = cart.filter(p => p.id !== id);
+      renderCart();
+    }
+
+    function goToCheckout() {
+      alert('Redirecting to checkout page...');
+      window.location.href = 'checkout.html';
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>
