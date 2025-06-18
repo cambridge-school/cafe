@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Admin Login - Green Sip Café</title>
+  <title>Login - Green Sip Café</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #e4f0e2;
+      background: #f4f9f4;
+      color: #2a4d25;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -17,99 +18,105 @@
     .login-container {
       background: white;
       padding: 30px 40px;
-      border-radius: 10px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
       width: 320px;
     }
     h2 {
       margin-bottom: 25px;
       text-align: center;
-      color: #2d6a4f;
+      color: #2f6b4a;
     }
     label {
       display: block;
       margin-bottom: 6px;
       font-weight: 600;
-      color: #1b4332;
     }
     input[type="text"],
     input[type="password"] {
       width: 100%;
-      padding: 10px;
-      border: 1.8px solid #95c88d;
-      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 18px;
+      border: 1.8px solid #2f6b4a;
+      border-radius: 8px;
       font-size: 1rem;
-      margin-bottom: 20px;
-      outline: none;
-      transition: border-color 0.3s;
-    }
-    input[type="text"]:focus,
-    input[type="password"]:focus {
-      border-color: #40916c;
     }
     button {
-      width: 100%;
-      padding: 12px;
-      background-color: #40916c;
+      background-color: #2f6b4a;
       color: white;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s;
       font-weight: 700;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
     }
     button:hover {
-      background-color: #2d6a4f;
+      background-color: #1e4e1b;
     }
-    .error-message {
-      color: #d00000;
-      font-weight: 600;
-      margin-bottom: 15px;
-      display: none;
+    .signup-link {
+      margin-top: 15px;
       text-align: center;
+      font-size: 0.95rem;
+    }
+    .signup-link a {
+      color: #2f6b4a;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .signup-link a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
+
   <div class="login-container">
-    <h2>Admin Login</h2>
-    <div class="error-message" id="errorMsg">Invalid username or password</div>
-    <form id="loginForm" autocomplete="off">
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" placeholder="Enter username" required />
+    <h2>Login to Green Sip Café</h2>
+    <form id="loginForm">
+      <label for="userId">User ID</label>
+      <input type="text" id="userId" name="userId" placeholder="Enter your user ID" required />
 
       <label for="password">Password</label>
-      <input type="password" id="password" name="password" placeholder="Enter password" required />
+      <input type="password" id="password" name="password" placeholder="Enter your password" required />
 
       <button type="submit">Login</button>
     </form>
+    <div class="signup-link">
+      Don't have an account? <a href="signup.html">Sign Up</a>
+    </div>
   </div>
 
   <script>
-    const loginForm = document.getElementById('loginForm');
-    const errorMsg = document.getElementById('errorMsg');
+    const credentials = {
+      admin: { id: 'admin', password: 'admin123' },
+      user: { id: 'user', password: 'user123' }
+    };
 
-    // Hardcoded credentials for demo
-    const ADMIN_USERNAME = 'admin';
-    const ADMIN_PASSWORD = 'greensip123';
-
-    loginForm.addEventListener('submit', function (e) {
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
-      const username = loginForm.username.value.trim();
-      const password = loginForm.password.value.trim();
+      const userId = document.getElementById('userId').value.trim();
+      const password = document.getElementById('password').value.trim();
 
-      if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-        // Clear error message
-        errorMsg.style.display = 'none';
-        // Redirect to admin panel
-        window.location.href = 'admin.html';
+      if (!userId || !password) {
+        alert('Please fill in both fields.');
+        return;
+      }
+
+      if (userId === credentials.admin.id && password === credentials.admin.password) {
+        alert('Welcome Admin! Redirecting to Admin Dashboard...');
+        window.location.href = 'admin.html'; // Admin portal page
+      } else if (userId === credentials.user.id && password === credentials.user.password) {
+        alert('Welcome User! Redirecting to Home Page...');
+        window.location.href = 'index.html'; // User homepage
       } else {
-        // Show error message
-        errorMsg.style.display = 'block';
+        alert('Invalid User ID or Password. Please try again.');
       }
     });
   </script>
+
 </body>
 </html>
