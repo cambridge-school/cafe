@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Green Sip Café - Checkout</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f9f4;
+      margin: 0;
+      padding: 20px;
+      color: #2a4d25;
+    }
+    h1 {
+      text-align: center;
+      color: #2f6b4a;
+      margin-bottom: 30px;
+    }
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+    .cart-summary {
+      border-bottom: 2px solid #d9f0e1;
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .total {
+      font-size: 1.25rem;
+      color: #1e4e1b;
+      text-align: right;
+      margin-top: 12px;
+      font-weight: 700;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1.8px solid #a9d6a4;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #2a4d25;
+    }
+    .payment-options label {
+      display: inline-block;
+      margin-right: 20px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .payment-options input {
+      margin-right: 6px;
+      cursor: pointer;
+    }
+    .payment-info {
+      background: #d9f0e1;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      color: #2f6b4a;
+      font-weight: 700;
+      font-size: 1rem;
+      text-align: center;
+    }
+    .conditional-field {
+      display: none;
+    }
+    button {
+      background-color: #2f6b4a;
+      color: white;
+      border: none;
+      padding: 14px 0;
+      width: 100%;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #1e4e1b;
+    }
+    @media (max-width: 480px) {
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .total {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Checkout - Green Sip Café</h1>
+    
+    <div class="cart-summary" id="cartSummary">
+      <h2>Your Cart</h2>
+      <!-- Cart items will be dynamically added here -->
+      <div id="cartItems"></div>
+      <div class="total" id="totalPrice">Total: NPR 0</div>
+    </div>
+    
+    <form id="checkoutForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+      
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required />
+      
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
+      
+      <label>Payment Method</label>
+      <div class="payment-options">
+        <label><input type="radio" name="paymentMethod" value="esewa" required /> eSewa</label>
+        <label><input type="radio" name="paymentMethod" value="khalti" /> Khalti</label>
+        <label><input type="radio" name="paymentMethod" value="cod" /> Cash on Delivery</label>
+      </div>
+      
+      <div class="payment-info">
+        Send payment to number: <strong>9868156268</strong> (eSewa & Khalti)
+      </div>
+
+      <!-- Conditional fields: shown only if eSewa or Khalti selected -->
+      <div id="conditionalFields" class="conditional-field">
+        <label for="transactionCode">Transaction Code</label>
+        <input type="text" id="transactionCode" name="transactionCode" placeholder="Enter your payment transaction code" />
+        
+        <label for="paymentScreenshot">Upload Payment Screenshot</label>
+        <input type="file" id="paymentScreenshot" name="paymentScreenshot" accept="image/*" />
+      </div>
+      
+      <button type="submit">Place Order</button>
+    </form>
+  </div>
+  
+  <script>
+    // Sample cart data — replace with actual cart logic as needed
+    const cart = [
+      { id: 1, name: 'Green Tea', price: 150, quantity: 2 },
+      { id: 2, name: 'Cappuccino', price: 250, quantity: 1 },
+      { id: 3, name: 'Blueberry Muffin', price: 180, quantity: 3 },
+    ];
+    
+    const cartItemsDiv = document.getElementById('cartItems');
+    const totalPriceDiv = document.getElementById('totalPrice');
+    
+    function renderCart() {
+      cartItemsDiv.innerHTML = '';
+      let total = 0;
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <div>${item.name} x ${item.quantity}</div>
+          <div>NPR ${itemTotal.toLocaleString()}</div>
+        `;
+        cartItemsDiv.appendChild(div);
+      });
+      totalPriceDiv.textContent = `Total: NPR ${total.toLocaleString()}`;
+    }
+    
+    renderCart();
+
+    // Show/hide transaction fields based on payment method
+    const paymentRadios = document.querySelectorAll('input[name="paymentMethod"]');
+    const conditionalFields = document.getElementById('conditionalFields');
+    const transactionCodeInput = document.getElementById('transactionCode');
+    const paymentScreenshotInput = document.getElementById('paymentScreenshot');
+
+    function toggleConditionalFields() {
+      const selected = document.querySelector('input[name="paymentMethod"]:checked');
+      if (selected && (selected.value === 'esewa' || selected.value === 'khalti')) {
+        conditionalFields.style.display = 'block';
+        transactionCodeInput.setAttribute('required', 'required');
+        paymentScreenshotInput.setAttribute('required', 'required');
+      } else {
+        conditionalFields.style.display = 'none';
+        transactionCodeInput.removeAttribute('required');
+        paymentScreenshotInput.removeAttribute('required');
+      }
+    }
+
+    paymentRadios.forEach(radio => {
+      radio.addEventListener('change', toggleConditionalFields);
+    });
+
+    // Initial call
+    toggleConditionalFields();
+
+    // Handle form submission
+    document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const form = e.target;
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const phone = form.phone.value.trim();
+      const paymentMethod = form.paymentMethod.value;
+      const transactionCode = form.transactionCode.value.trim();
+      const paymentScreenshot = form.paymentScreenshot.files[0];
+
+      if (!name || !email || !phone || !paymentMethod) {
+        alert('Please fill out all required fields.');
+        return;
+      }
+
+      if ((paymentMethod === 'esewa' || paymentMethod === 'khalti') && (!transactionCode || !paymentScreenshot)) {
+        alert('Please provide transaction code and upload payment screenshot.');
+        return;
+      }
+
+      // In real app, send order data to backend here, including file upload
+      
+      alert(`Thank you for your order, ${name}! Payment via ${paymentMethod} will be processed.`);
+      
+      form.reset();
+      toggleConditionalFields();
+    });
+  </script>
+</body>
+</html>
