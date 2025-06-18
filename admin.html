@@ -7,317 +7,150 @@
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #e9f5ec;
+      background: #f4f9f4;
       margin: 0;
-      padding: 20px 30px;
-      color: #1b4332;
+      padding: 20px;
+      color: #2a4d25;
     }
-    h1 {
-      text-align: center;
-      color: #2d6a4f;
-      margin-bottom: 30px;
+    h1, h2 {
+      color: #2f6b4a;
     }
     .container {
       max-width: 900px;
       margin: 0 auto;
       background: white;
-      padding: 25px 30px;
-      border-radius: 10px;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
-    form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px 20px;
-      margin-bottom: 30px;
-    }
-    label {
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-    input[type="text"],
-    input[type="number"],
-    textarea {
-      width: 100%;
-      padding: 8px 10px;
-      border: 1.5px solid #95c88d;
-      border-radius: 6px;
-      font-size: 1rem;
-      resize: vertical;
-    }
-    textarea {
-      grid-column: span 2;
-      min-height: 60px;
-    }
-    select {
-      padding: 8px 10px;
-      border-radius: 6px;
-      border: 1.5px solid #95c88d;
-      font-size: 1rem;
-    }
-    button {
-      grid-column: span 2;
-      padding: 12px;
-      background-color: #40916c;
-      color: white;
-      font-size: 1.1rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    button:hover {
-      background-color: #2d6a4f;
-    }
+    /* Orders Table */
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 10px;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1.5px solid #a9d6a4;
     }
     th, td {
-      border: 1px solid #95c88d;
-      padding: 12px 15px;
-      text-align: center;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      color: #2a4d25;
     }
     th {
-      background-color: #a5d6a7;
-      color: #1b4332;
+      background-color: #d9f0e1;
     }
-    img {
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 6px;
-    }
-    .action-btn {
-      cursor: pointer;
-      padding: 5px 10px;
-      border-radius: 6px;
-      border: none;
-      font-weight: 600;
+    /* Buttons */
+    .btn {
+      padding: 8px 15px;
+      background-color: #2f6b4a;
       color: white;
-      margin: 0 5px;
-      transition: background-color 0.3s;
-    }
-    .edit-btn {
-      background-color: #4a90e2;
-    }
-    .edit-btn:hover {
-      background-color: #357abd;
-    }
-    .delete-btn {
-      background-color: #d00000;
-    }
-    .delete-btn:hover {
-      background-color: #a50000;
-    }
-    .logout-btn {
-      margin-top: 15px;
-      background-color: #6a994e;
-      padding: 10px 20px;
-      font-weight: 600;
+      border: none;
       border-radius: 8px;
-      float: right;
       cursor: pointer;
-      color: white;
-      border: none;
-      transition: background-color 0.3s;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
     }
-    .logout-btn:hover {
-      background-color: #4a7031;
+    .btn:hover {
+      background-color: #1e4e1b;
+    }
+    /* Section spacing */
+    section {
+      margin-bottom: 40px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Green Sip Café - Admin Panel</h1>
+    <h1>Admin Panel - Green Sip Café</h1>
     
-    <button class="logout-btn" id="logoutBtn">Logout</button>
+    <!-- Existing admin content goes here -->
 
-    <form id="productForm">
-      <div>
-        <label for="productName">Product Name</label>
-        <input type="text" id="productName" required />
-      </div>
-
-      <div>
-        <label for="productPrice">Price (NPR)</label>
-        <input type="number" id="productPrice" min="1" required />
-      </div>
-
-      <div>
-        <label for="productImage">Image URL</label>
-        <input type="text" id="productImage" placeholder="Paste image URL here" required />
-      </div>
-
-      <div>
-        <label for="productCategory">Category</label>
-        <select id="productCategory" required>
-          <option value="" disabled selected>Select Category</option>
-          <option value="Coffee">Coffee</option>
-          <option value="Tea">Tea</option>
-          <option value="Snacks">Snacks</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-
-      <div style="grid-column: span 2;">
-        <label for="productDescription">Description</label>
-        <textarea id="productDescription" placeholder="Enter product description" required></textarea>
-      </div>
-
-      <button type="submit">Add Product</button>
-    </form>
-
-    <table id="productTable">
-      <thead>
-        <tr>
-          <th>Image</th>
-          <th>Name</th>
-          <th>Price (NPR)</th>
-          <th>Category</th>
-          <th>Description</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Products will be listed here -->
-      </tbody>
-    </table>
+    <!-- Orders Received Section -->
+    <section id="ordersSection">
+      <h2>Orders Received</h2>
+      <table id="ordersTable">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Customer Name</th>
+            <th>Items</th>
+            <th>Total Amount (NPR)</th>
+            <th>Payment Method</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Orders will be injected here -->
+        </tbody>
+      </table>
+    </section>
   </div>
 
   <script>
-    // Elements
-    const productForm = document.getElementById('productForm');
-    const productTableBody = document.querySelector('#productTable tbody');
-    const logoutBtn = document.getElementById('logoutBtn');
+    // Sample order data - Replace this with real data later or load from backend/localStorage
+    const orders = [
+      {
+        id: 'ORD001',
+        customer: 'Sita Sharma',
+        items: 'Green Tea x2, Blueberry Muffin x1',
+        total: 480,
+        paymentMethod: 'eSewa',
+        status: 'Pending'
+      },
+      {
+        id: 'ORD002',
+        customer: 'Ram Thapa',
+        items: 'Cappuccino x1',
+        total: 250,
+        paymentMethod: 'Cash on Delivery',
+        status: 'Completed'
+      },
+      {
+        id: 'ORD003',
+        customer: 'Maya Rai',
+        items: 'Espresso x3',
+        total: 600,
+        paymentMethod: 'Khalti',
+        status: 'Pending'
+      }
+    ];
 
-    // Load products from localStorage or empty array
-    let products = JSON.parse(localStorage.getItem('greenSipProducts')) || [];
+    const ordersTableBody = document.querySelector('#ordersTable tbody');
 
-    // Render products to table
-    function renderProducts() {
-      productTableBody.innerHTML = '';
-      products.forEach((product, index) => {
+    function renderOrders() {
+      ordersTableBody.innerHTML = ''; // Clear existing rows
+      orders.forEach((order, index) => {
         const tr = document.createElement('tr');
 
         tr.innerHTML = `
-          <td><img src="${product.image}" alt="${product.name}" /></td>
-          <td>${product.name}</td>
-          <td>रु ${product.price.toFixed(2)}</td>
-          <td>${product.category}</td>
-          <td>${product.description}</td>
-          <td>
-            <button class="action-btn edit-btn" data-index="${index}">Edit</button>
-            <button class="action-btn delete-btn" data-index="${index}">Delete</button>
-          </td>
+          <td>${order.id}</td>
+          <td>${order.customer}</td>
+          <td>${order.items}</td>
+          <td>NPR ${order.total.toLocaleString()}</td>
+          <td>${order.paymentMethod}</td>
+          <td>${order.status}</td>
+          <td><button class="btn" onclick="toggleStatus(${index})">${order.status === 'Pending' ? 'Mark Completed' : 'Mark Pending'}</button></td>
         `;
 
-        productTableBody.appendChild(tr);
+        ordersTableBody.appendChild(tr);
       });
     }
 
-    // Add new product
-    productForm.addEventListener('submit', e => {
-      e.preventDefault();
-
-      const newProduct = {
-        name: productForm.productName.value.trim(),
-        price: parseFloat(productForm.productPrice.value),
-        image: productForm.productImage.value.trim(),
-        category: productForm.productCategory.value,
-        description: productForm.productDescription.value.trim(),
-      };
-
-      products.push(newProduct);
-      localStorage.setItem('greenSipProducts', JSON.stringify(products));
-      renderProducts();
-      productForm.reset();
-    });
-
-    // Handle Edit and Delete buttons
-    productTableBody.addEventListener('click', e => {
-      if (e.target.classList.contains('delete-btn')) {
-        const idx = e.target.dataset.index;
-        if (confirm(`Delete product "${products[idx].name}"?`)) {
-          products.splice(idx, 1);
-          localStorage.setItem('greenSipProducts', JSON.stringify(products));
-          renderProducts();
-        }
+    // Toggle order status between Pending and Completed
+    function toggleStatus(orderIndex) {
+      if (orders[orderIndex].status === 'Pending') {
+        orders[orderIndex].status = 'Completed';
+      } else {
+        orders[orderIndex].status = 'Pending';
       }
-
-      if (e.target.classList.contains('edit-btn')) {
-        const idx = e.target.dataset.index;
-        const product = products[idx];
-        // Prefill form with product data for editing
-        productForm.productName.value = product.name;
-        productForm.productPrice.value = product.price;
-        productForm.productImage.value = product.image;
-        productForm.productCategory.value = product.category;
-        productForm.productDescription.value = product.description;
-
-        // Change button text to 'Update Product'
-        productForm.querySelector('button[type="submit"]').textContent = 'Update Product';
-
-        // Remove existing submit event to avoid stacking
-        productForm.removeEventListener('submit', addProductHandler);
-
-        // New submit handler for updating product
-        const updateProductHandler = (e) => {
-          e.preventDefault();
-
-          products[idx] = {
-            name: productForm.productName.value.trim(),
-            price: parseFloat(productForm.productPrice.value),
-            image: productForm.productImage.value.trim(),
-            category: productForm.productCategory.value,
-            description: productForm.productDescription.value.trim(),
-          };
-
-          localStorage.setItem('greenSipProducts', JSON.stringify(products));
-          renderProducts();
-          productForm.reset();
-          productForm.querySelector('button[type="submit"]').textContent = 'Add Product';
-
-          // Remove this update handler and re-add the original add handler
-          productForm.removeEventListener('submit', updateProductHandler);
-          productForm.addEventListener('submit', addProductHandler);
-        };
-
-        productForm.addEventListener('submit', updateProductHandler);
-      }
-    });
-
-    // Initial render
-    renderProducts();
-
-    // Add product handler (for adding new products)
-    function addProductHandler(e) {
-      e.preventDefault();
-      const newProduct = {
-        name: productForm.productName.value.trim(),
-        price: parseFloat(productForm.productPrice.value),
-        image: productForm.productImage.value.trim(),
-        category: productForm.productCategory.value,
-        description: productForm.productDescription.value.trim(),
-      };
-
-      products.push(newProduct);
-      localStorage.setItem('greenSipProducts', JSON.stringify(products));
-      renderProducts();
-      productForm.reset();
+      renderOrders();
     }
 
-    // Attach the initial add handler
-    productForm.addEventListener('submit', addProductHandler);
-
-    // Logout button redirects to login page
-    logoutBtn.addEventListener('click', () => {
-      if (confirm('Are you sure you want to logout?')) {
-        window.location.href = 'login.html';
-      }
-    });
+    // Initial render
+    renderOrders();
   </script>
 </body>
 </html>
