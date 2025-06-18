@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Green Sip Café - Menu & Order</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f7f2;
+      margin: 0;
+      padding: 0;
+      color: #1b4332;
+    }
+    header {
+      background-color: #40916c;
+      color: white;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 {
+      margin: 0;
+      font-weight: 700;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 25px auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 20px;
+    }
+    .products {
+      flex: 3;
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(230px,1fr));
+      gap: 20px;
+    }
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s;
+    }
+    .product-card:hover {
+      transform: scale(1.03);
+    }
+    .product-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .product-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin: 0 0 5px 0;
+      color: #2d6a4f;
+    }
+    .product-category {
+      font-size: 0.85rem;
+      color: #609966;
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+    .product-desc {
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      min-height: 40px;
+      color: #4a4a4a;
+    }
+    .product-price {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #40916c;
+      margin-bottom: 12px;
+    }
+    button.add-to-cart {
+      background-color: #40916c;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button.add-to-cart:hover {
+      background-color: #2d6a4f;
+    }
+
+    /* Cart Sidebar */
+    .cart-sidebar {
+      flex: 1;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      max-height: 80vh;
+      overflow-y: auto;
+      position: sticky;
+      top: 20px;
+    }
+    .cart-sidebar h2 {
+      margin-top: 0;
+      color: #2d6a4f;
+      font-weight: 700;
+      border-bottom: 2px solid #95c88d;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #d7e3d6;
+      padding-bottom: 10px;
+    }
+    .cart-item-name {
+      font-weight: 600;
+      color: #1b4332;
+      flex: 2;
+    }
+    .cart-item-qty {
+      flex: 1;
+      text-align: center;
+      font-weight: 600;
+      color: #40916c;
+    }
+    .cart-item-price {
+      flex: 1;
+      text-align: right;
+      font-weight: 700;
+      color: #2d6a4f;
+    }
+    .cart-item-remove {
+      flex: 0;
+      background-color: #d00000;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 3px 7px;
+      cursor: pointer;
+      font-weight: 700;
+      margin-left: 8px;
+      transition: background-color 0.3s;
+    }
+    .cart-item-remove:hover {
+      background-color: #a50000;
+    }
+    .cart-total {
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-align: right;
+      margin-top: 15px;
+      color: #40916c;
+    }
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      background-color: #2d6a4f;
+      color: white;
+      padding: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    .checkout-btn:hover {
+      background-color: #1b4332;
+    }
+
+    @media(max-width: 900px) {
+      .container {
+        flex-direction: column;
+      }
+      .cart-sidebar {
+        max-height: none;
+        position: relative;
+        top: auto;
+        margin-top: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Green Sip Café - Menu</h1>
+    <a href="login.html" style="color:#d7f3e3; font-weight:700; text-decoration:none;">Admin Login</a>
+  </header>
+
+  <div class="container">
+    <section class="products" id="productList">
+      <!-- Products inserted here dynamically -->
+    </section>
+
+    <aside class="cart-sidebar">
+      <h2>Your Cart</h2>
+      <div id="cartItems">
+        <p>Your cart is empty.</p>
+      </div>
+      <div class="cart-total" id="cartTotal">Total: रु 0.00</div>
+      <button class="checkout-btn" id="checkoutBtn" disabled>Proceed to Checkout</button>
+    </aside>
+  </div>
+
+  <script>
+    const productListEl = document.getElementById('productList');
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartTotalEl = document.getElementById('cartTotal');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    // Load products from localStorage or empty array
+    let products = JSON.parse(localStorage.getItem('greenSipProducts')) || [];
+
+    // Cart stored in memory (can be extended to localStorage if needed)
+    let cart = [];
+
+    // Render product cards
+    function renderProducts() {
+      if(products.length === 0) {
+        productListEl.innerHTML = '<p style="font-style:italic; color:#609966;">No products available currently. Please check back later.</p>';
+        return;
+      }
+
+      productListEl.innerHTML = '';
+      products.forEach((product, index) => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" />
+          <h3 class="product-name">${product.name}</h3>
+          <div class="product-category">${product.category}</div>
+          <div class="product-desc">${product.description}</div>
+          <div class="product-price">रु ${product.price.toFixed(2)}</div>
+          <button class="add-to-cart" data-index="${index}">Add to Cart</button>
+        `;
+        productListEl.appendChild(card);
+      });
+    }
+
+    // Render cart sidebar
+    function renderCart() {
+      if(cart.length === 0) {
+        cartItemsEl.innerHTML = '<p>Your cart is empty.</p>';
+        cartTotalEl.textContent = 'Total: रु 0.00';
+        checkoutBtn.disabled = true;
+        return;
+      }
+
+      cartItemsEl.innerHTML = '';
+      let total = 0;
+
+      cart.forEach(item => {
+        const product = products[item.index];
+        const subtotal = product.price * item.qty;
+        total += subtotal;
+
+        const cartItemEl = document.createElement('div');
+        cartItemEl.className = 'cart-item';
+        cartItemEl.innerHTML = `
+          <div class="cart-item-name">${product.name}</div>
+          <div class="cart-item-qty">x${item.qty}</div>
+          <div class="cart-item-price">रु ${subtotal.toFixed(2)}</div>
+          <button class="cart-item-remove" data-index="${item.index}">&times;</button>
+        `;
+
+        cartItemsEl.appendChild(cartItemEl);
+      });
+
+      cartTotalEl.textContent = `Total: रु ${total.toFixed(2)}`;
+      checkoutBtn.disabled = false;
+    }
+
+    // Add to cart handler
+    productListEl.addEventListener('click', e => {
+      if(e.target.classList.contains('add-to-cart')) {
+        const index = parseInt(e.target.dataset.index);
+        const cartItem = cart.find(i => i.index === index);
+
+        if(cartItem) {
+          cartItem.qty++;
+        } else {
+          cart.push({ index: index, qty: 1 });
+        }
+        renderCart();
+      }
+    });
+
+    // Remove from cart handler
+    cartItemsEl.addEventListener('click', e => {
+      if(e.target.classList.contains('cart-item-remove')) {
+        const index = parseInt(e.target.dataset.index);
+        const itemIndex = cart.findIndex(i => i.index === index);
+        if(itemIndex > -1) {
+          cart.splice(itemIndex, 1);
+          renderCart();
+        }
+      }
+    });
+
+    // Checkout button (just alert for now)
+    checkoutBtn.addEventListener('click', () => {
+      alert('Proceeding to checkout! Implement checkout flow here.');
+      // You can redirect to checkout page, or open modal for payment, etc.
+    });
+
+    // Initial render calls
+    renderProducts();
+    renderCart();
+  </script>
+
+</body>
+</html>
