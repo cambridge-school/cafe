@@ -4,811 +4,260 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Green Sip Café - Home</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     /* Reset & base */
     * {
       box-sizing: border-box;
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #2a4d25;
     }
     body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: #f0f8f5;
-      color: #222;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      background: #f4f9f4;
+      line-height: 1.6;
     }
     a {
-      color: #2e7d32;
       text-decoration: none;
+      color: #2f6b4a;
+      font-weight: 600;
     }
-    /* Header */
+    a:hover {
+      color: #1e4e1b;
+    }
     header {
-      background: #2e7d32;
-      padding: 1rem 2rem;
+      background-color: #2f6b4a;
       color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
     header h1 {
-      margin: 0;
+      font-size: 2.5rem;
+      margin-bottom: 8px;
       font-weight: 700;
-      font-size: 1.8rem;
       letter-spacing: 1.5px;
     }
-    nav a {
-      margin-left: 1.5rem;
-      font-weight: 600;
-      transition: color 0.3s ease;
+    header p {
+      font-size: 1.1rem;
+      font-style: italic;
+      opacity: 0.85;
     }
-    nav a:hover {
-      color: #a5d6a7;
+    nav {
+      margin: 15px 0;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 15px;
+      font-size: 1.1rem;
     }
 
-    /* Hero */
     .hero {
       background: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-      height: 420px;
+      height: 450px;
       display: flex;
+      justify-content: center;
       align-items: center;
-      justify-content: center;
       color: white;
-      text-shadow: 1px 1px 8px rgba(0,0,0,0.7);
-      text-align: center;
-      padding: 0 1rem;
-      flex-shrink: 0;
-    }
-    .hero h2 {
-      font-size: 3.2rem;
-      max-width: 700px;
-      margin-bottom: 0.4rem;
-      animation: fadeInDown 1s ease forwards;
-      opacity: 0;
-    }
-    .hero p {
-      font-size: 1.5rem;
-      font-weight: 600;
-      animation: fadeInUp 1s ease forwards;
-      opacity: 0;
-    }
-    @keyframes fadeInDown {
-      to { opacity: 1; transform: translateY(0); }
-      from { opacity: 0; transform: translateY(-20px);}
-    }
-    @keyframes fadeInUp {
-      to { opacity: 1; transform: translateY(0); }
-      from { opacity: 0; transform: translateY(20px);}
-    }
-
-    /* Container */
-    .container {
-      max-width: 1200px;
-      padding: 2rem 1rem 3rem 1rem;
-      margin: auto;
-      flex-grow: 1;
-    }
-
-    /* Section Titles */
-    h3.section-title {
-      font-size: 2.3rem;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+      font-size: 2.8rem;
       font-weight: 700;
-      margin-bottom: 1.3rem;
-      color: #2e7d32;
-      border-bottom: 3px solid #a5d6a7;
-      padding-bottom: 0.3rem;
+      letter-spacing: 1.2px;
+      margin-bottom: 40px;
     }
 
-    /* Menu categories */
-    .category-tabs {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .category-tab {
-      padding: 0.6rem 1.5rem;
-      border: 2px solid #2e7d32;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: 600;
-      color: #2e7d32;
-      transition: all 0.3s ease;
-      user-select: none;
-    }
-    .category-tab.active,
-    .category-tab:hover {
-      background: #2e7d32;
-      color: white;
+    .intro {
+      max-width: 900px;
+      margin: 0 auto 50px;
+      padding: 0 20px;
+      text-align: center;
+      font-size: 1.25rem;
+      line-height: 1.5;
+      color: #3a5a33;
     }
 
-    /* Product Grid */
-    .product-grid {
+    .menu-section {
+      max-width: 1000px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+    }
+    .menu-section h2 {
+      color: #2f6b4a;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .menu-items {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 1.8rem;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 25px;
     }
-    .product-card {
+    .menu-card {
       background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
+      border-radius: 14px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
       overflow: hidden;
-      position: relative;
       transition: transform 0.3s ease;
     }
-    .product-card:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 12px 25px rgba(46,125,50,0.3);
+    .menu-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.15);
     }
-    .product-card img {
+    .menu-card img {
       width: 100%;
-      height: 190px;
+      height: 150px;
       object-fit: cover;
     }
-    .product-info {
-      padding: 1.3rem 1.3rem 1.6rem 1.3rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .menu-card-content {
+      padding: 15px 20px;
     }
-    .product-info h4 {
-      margin: 0 0 0.5rem;
-      color: #2e7d32;
-      font-weight: 700;
-      font-size: 1.3rem;
-      text-transform: capitalize;
+    .menu-card-content h3 {
+      margin-bottom: 10px;
+      color: #1e4e1b;
+      font-size: 1.25rem;
     }
-    .product-info p {
-      flex-grow: 1;
-      font-size: 1rem;
-      color: #555;
-      margin-bottom: 1rem;
-      line-height: 1.3;
+    .menu-card-content p {
+      font-size: 0.95rem;
+      color: #556b3f;
+      margin-bottom: 14px;
     }
     .price {
       font-weight: 700;
-      font-size: 1.15rem;
-      color: #388e3c;
-      margin-bottom: 1.1rem;
-    }
-    .product-info button {
-      background: #2e7d32;
-      border: none;
-      color: white;
-      padding: 0.7rem;
-      font-weight: 700;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.15);
-    }
-    .product-info button:hover {
-      background: #1b4d21;
-      box-shadow: 0 6px 10px rgba(0,0,0,0.25);
-    }
-
-    /* Badge for best seller */
-    .badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: #a5d6a7;
-      color: #2e7d32;
-      font-weight: 700;
-      font-size: 0.85rem;
-      padding: 0.2rem 0.5rem;
-      border-radius: 5px;
-      text-transform: uppercase;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-    }
-
-    /* About Section */
-    .about-section {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      padding: 2rem;
-      margin: 3rem auto;
-      max-width: 900px;
-      text-align: center;
-      color: #2e7d32;
-    }
-    .about-section h3 {
-      margin-bottom: 1rem;
-      font-size: 2rem;
-      font-weight: 700;
-    }
-    .about-section p {
-      font-size: 1.15rem;
-      line-height: 1.5;
-      max-width: 700px;
-      margin: auto;
-    }
-
-    /* Testimonials slider */
-    .testimonials {
-      max-width: 900px;
-      margin: 3rem auto;
-      padding: 2rem 1rem;
-      background: #e6f2e6;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      text-align: center;
-    }
-    .testimonials h3 {
-      color: #2e7d32;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      font-size: 2rem;
-    }
-    .testimonial {
-      display: none;
-      font-style: italic;
       font-size: 1.1rem;
-      color: #444;
-      max-width: 700px;
-      margin: auto;
+      color: #2f6b4a;
     }
-    .testimonial.active {
-      display: block;
-      animation: fadeIn 0.8s ease forwards;
-    }
-    .testimonial small {
-      display: block;
-      margin-top: 1rem;
-      font-weight: 600;
-      color: #2e7d32;
-      font-size: 0.95rem;
-    }
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-    /* Testimonial navigation */
-    .testimonial-nav {
-      margin-top: 1rem;
-    }
-    .testimonial-nav button {
-      background: #2e7d32;
-      border: none;
-      color: white;
-      padding: 0.4rem 1rem;
-      margin: 0 0.3rem;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: 700;
-      transition: background-color 0.3s ease;
-    }
-    .testimonial-nav button:hover {
-      background: #1b4d21;
-    }
-
-    /* Call to action */
-    .cta-section {
-      background: #2e7d32;
-      color: white;
-      text-align: center;
-      padding: 2.8rem 1rem;
-      border-radius: 0 0 20px 20px;
-      box-shadow: 0 -4px 10px rgba(0,0,0,0.15);
-      margin-top: 3rem;
-    }
-    .cta-section h3 {
-      font-size: 2.3rem;
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-    .cta-section p {
-      font-size: 1.3rem;
-      margin-bottom: 2rem;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .cta-section a {
-      background: #a5d6a7;
-      color: #2e7d32;
-      padding: 0.9rem 2.5rem;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      transition: background-color 0.3s ease;
-    }
-    .cta-section a:hover {
-      background: #82b580;
-    }
-
-    /* Cart Sidebar */
-    .cart-sidebar {
-      position: fixed;
-      top: 0;
-      right: -350px;
-      width: 350px;
-      height: 100vh;
-      background: white;
-      box-shadow: -3px 0 15px rgba(0,0,0,0.2);
-      transition: right 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      z-index: 1000;
-    }
-    .cart-sidebar.open {
-      right: 0;
-    }
-    .cart-header {
-      background: #2e7d32;
-      color: white;
-      padding: 1rem;
-      font-weight: 700;
-      font-size: 1.3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .cart-header button {
-      background: transparent;
-      border: none;
-      font-size: 1.5rem;
-      color: white;
-      cursor: pointer;
-    }
-    .cart-content {
-      padding: 1rem;
-      flex-grow: 1;
-      overflow-y: auto;
-    }
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 1rem;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 0.5rem;
-    }
-    .cart-item-info {
-      flex-grow: 1;
-    }
-    .cart-item-info h5 {
-      margin: 0 0 0.3rem;
-      color: #2e7d32;
-    }
-    .cart-item-info small {
-      color: #555;
-      font-size: 0.9rem;
-    }
-    .cart-item-actions {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.3rem;
-    }
-    .cart-item-actions button {
-      background: #d32f2f;
-      border: none;
-      color: white;
-      padding: 0.2rem 0.5rem;
-      border-radius: 50%;
-      font-weight: 700;
-      cursor: pointer;
-      line-height: 1;
-      transition: background-color 0.3s ease;
-    }
-    .cart-item-actions button:hover {
-      background: #9a0000;
-    }
-    .cart-total {
-      font-weight: 700;
-      font-size: 1.2rem;
-      padding: 1rem;
-      border-top: 1px solid #ddd;
-    }
-    .checkout-btn {
-      background: #2e7d32;
+    .add-to-cart-btn {
+      background-color: #2f6b4a;
       color: white;
       border: none;
-      padding: 1rem;
-      font-weight: 700;
-      font-size: 1.1rem;
-      cursor: pointer;
+      padding: 10px 0;
       width: 100%;
-      border-radius: 0 0 10px 10px;
-      transition: background-color 0.3s ease;
-    }
-    .checkout-btn:hover {
-      background: #1b4d21;
-    }
-    /* Floating Cart Button */
-    .cart-toggle-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #2e7d32;
-      color: white;
-      border: none;
-      padding: 1rem 1.2rem;
-      border-radius: 50px;
       font-weight: 700;
+      font-size: 1rem;
+      border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: background-color 0.3s ease;
-      z-index: 1100;
+      transition: background-color 0.25s ease;
     }
-    .cart-toggle-btn:hover {
-      background: #1b4d21;
+    .add-to-cart-btn:hover {
+      background-color: #1e4e1b;
     }
 
-    /* Footer */
     footer {
-      background: #2e7d32;
+      background-color: #2f6b4a;
       color: white;
-      padding: 1rem 2rem;
+      padding: 18px 0;
       text-align: center;
-      font-weight: 600;
-      font-size: 0.95rem;
-      margin-top: auto;
-      user-select: none;
-    }
-    footer a {
-      color: #a5d6a7;
-      margin: 0 0.6rem;
-      font-weight: 700;
-    }
-    footer a:hover {
-      color: #c8e6c9;
+      font-size: 0.9rem;
+      letter-spacing: 0.6px;
     }
 
     /* Responsive */
-    @media (max-width: 600px){
-      .cart-sidebar {
-        width: 100%;
-      }
+    @media (max-width: 600px) {
       .hero {
+        font-size: 1.8rem;
         height: 280px;
       }
-      .hero h2 {
-        font-size: 2rem;
-      }
-      .hero p {
-        font-size: 1rem;
-      }
-      nav a {
-        margin-left: 1rem;
-      }
-      .product-grid {
+      .menu-items {
         grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Green Sip Café</h1>
-    <nav>
-      <a href="homepage.html">Home</a>
-      <a href="menu.html">Menu</a>
-      <a href="login.html">Login</a>
-      <a href="admin.html">Admin</a>
-    </nav>
-  </header>
 
-  <section class="hero" aria-label="Welcome section with cafe image and tagline">
-    <div>
-      <h2>Welcome to Green Sip Café</h2>
-      <p>Fresh brews, delicious snacks & cozy vibes in the heart of Kathmandu</p>
-    </div>
-  </section>
+<header>
+  <h1>Green Sip Café</h1>
+  <p>Your perfect cup of happiness ☕</p>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="cart.html">Cart</a>
+    <a href="booking.html">Booking</a>
+    <a href="login.html">Login</a>
+    <a href="admin.html">Admin</a>
+  </nav>
+</header>
 
-  <main class="container" role="main" aria-label="Main content">
+<section class="hero">
+  Freshly Brewed Flavors Await You!
+</section>
 
-    <section aria-labelledby="menu-title">
-      <h3 id="menu-title" class="section-title">Our Menu</h3>
+<section class="intro">
+  Welcome to Green Sip Café, where we bring you the freshest coffee, delightful snacks, and a cozy ambiance to relax and enjoy. Order online with easy payment options including eSewa, Khalti, or cash on delivery.
+</section>
 
-      <div class="category-tabs" role="tablist" aria-label="Product categories">
-        <button class="category-tab active" role="tab" aria-selected="true" aria-controls="category-coffee" id="tab-coffee">Coffee</button>
-        <button class="category-tab" role="tab" aria-selected="false" aria-controls="category-tea" id="tab-tea">Tea</button>
-        <button class="category-tab" role="tab" aria-selected="false" aria-controls="category-snacks" id="tab-snacks">Snacks</button>
-      </div>
+<section class="menu-section">
+  <h2>Featured Menu Items</h2>
+  <div class="menu-items" id="menuItems">
+    <!-- Menu items will be dynamically inserted here by script -->
+  </div>
+</section>
 
-      <div class="product-grid" id="product-grid" role="tabpanel" tabindex="0" aria-live="polite" aria-relevant="additions removals">
-        <!-- Products loaded dynamically -->
-      </div>
-    </section>
+<footer>
+  &copy; 2025 Green Sip Café | All rights reserved
+</footer>
 
-    <section class="about-section" aria-labelledby="about-title">
-      <h3 id="about-title">About Green Sip Café</h3>
-      <p>At Green Sip Café, we believe every cup tells a story. Sourced from the finest coffee beans and freshest ingredients, our menu offers a delicious journey from traditional espresso to unique local brews. Whether you're here for a quick caffeine fix or a cozy hangout, our friendly staff and soothing ambiance will make you feel right at home.</p>
-    </section>
-
-    <section class="testimonials" aria-labelledby="testimonials-title">
-      <h3 id="testimonials-title">What Our Customers Say</h3>
-      <div id="testimonial1" class="testimonial active" role="article">
-        <p>"The best coffee in Kathmandu! The ambiance is perfect for both work and chill time. Highly recommend the green tea latte."</p>
-        <small>– Sita M.</small>
-      </div>
-      <div id="testimonial2" class="testimonial" role="article">
-        <p>"Fresh snacks and great service. The prices in NPR are very reasonable, and I love that they support local farmers."</p>
-        <small>– Anil R.</small>
-      </div>
-      <div id="testimonial3" class="testimonial" role="article">
-        <p>"Cozy place with excellent vegan options. The staff is super friendly and the online ordering system is smooth."</p>
-        <small>– Priya K.</small>
-      </div>
-      <div class="testimonial-nav" role="navigation" aria-label="Testimonial navigation">
-        <button id="prev-testimonial" aria-controls="testimonial1 testimonial2 testimonial3" aria-label="Previous testimonial">&lt;</button>
-        <button id="next-testimonial" aria-controls="testimonial1 testimonial2 testimonial3" aria-label="Next testimonial">&gt;</button>
-      </div>
-    </section>
-
-    <section class="cta-section" aria-label="Call to action">
-      <h3>Ready to taste the difference?</h3>
-      <p>Order online or book a cozy spot to enjoy your favorite drink with us. Experience the best of Nepal’s flavors in NPR.</p>
-      <a href="booking.html" role="button" aria-pressed="false">Book a Table</a>
-    </section>
-  </main>
-
-  <!-- Cart Sidebar -->
-  <aside class="cart-sidebar" aria-label="Shopping cart" id="cart-sidebar" aria-hidden="true">
-    <div class="cart-header">
-      Cart
-      <button aria-label="Close cart" id="close-cart-btn">&times;</button>
-    </div>
-    <div class="cart-content" id="cart-content">
-      <p>Your cart is empty.</p>
-    </div>
-    <div class="cart-total" id="cart-total">Total: NPR 0</div>
-    <button class="checkout-btn" id="checkout-btn" disabled>Checkout</button>
-  </aside>
-
-  <button class="cart-toggle-btn" aria-label="Open cart" id="open-cart-btn">Cart 🛒</button>
-
-  <footer>
-    &copy; 2025 Green Sip Café &nbsp;|&nbsp;  Kathmandu, Nepal &nbsp;|&nbsp; 
-    <a href="mailto:info@greensipcafe.com">info@greensipcafe.com</a> &nbsp;|&nbsp; 
-    <a href="tel:+977-01-5551234">+977-01-5551234</a> &nbsp;|&nbsp;
-    <a href="https://facebook.com/greensipcafe" target="_blank" rel="noopener noreferrer">Facebook</a> &nbsp;|&nbsp;
-    <a href="https://instagram.com/greensipcafe" target="_blank" rel="noopener noreferrer">Instagram</a>
-  </footer>
-
-  <script>
-    // Sample product data in NPR currency
-    const products = {
-      coffee: [
-        {
-          id: 1,
-          name: 'Espresso',
-          description: 'Strong and bold traditional espresso shot.',
-          price: 120,
-          image: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=400&q=80',
-          bestSeller: true,
-        },
-        {
-          id: 2,
-          name: 'Cappuccino',
-          description: 'Espresso with steamed milk and foam.',
-          price: 180,
-          image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=400&q=80',
-          bestSeller: false,
-        },
-        {
-          id: 3,
-          name: 'Green Tea Latte',
-          description: 'Smooth and creamy latte with matcha green tea.',
-          price: 220,
-          image: 'https://images.unsplash.com/photo-1510626176961-4b27e6f41a2d?auto=format&fit=crop&w=400&q=80',
-          bestSeller: true,
-        }
-      ],
-      tea: [
-        {
-          id: 4,
-          name: 'Masala Chai',
-          description: 'Traditional Nepali spiced tea with milk.',
-          price: 90,
-          image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=400&q=80',
-          bestSeller: true,
-        },
-        {
-          id: 5,
-          name: 'Lemon Ginger Tea',
-          description: 'Refreshing lemon and ginger infusion.',
-          price: 110,
-          image: 'https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=400&q=80',
-          bestSeller: false,
-        }
-      ],
-      snacks: [
-        {
-          id: 6,
-          name: 'Veg Sandwich',
-          description: 'Fresh vegetables with cheese in toasted bread.',
-          price: 150,
-          image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80',
-          bestSeller: true,
-        },
-        {
-          id: 7,
-          name: 'Samosa',
-          description: 'Crispy fried pastry filled with spiced potatoes.',
-          price: 70,
-          image: 'https://images.unsplash.com/photo-1604908177523-3ed32758d134?auto=format&fit=crop&w=400&q=80',
-          bestSeller: false,
-        }
-      ]
-    };
-
-    // Elements
-    const categoryTabs = document.querySelectorAll('.category-tab');
-    const productGrid = document.getElementById('product-grid');
-
-    // Cart
-    const cartBtn = document.getElementById('open-cart-btn');
-    const cartSidebar = document.getElementById('cart-sidebar');
-    const closeCartBtn = document.getElementById('close-cart-btn');
-    const cartContent = document.getElementById('cart-content');
-    const cartTotal = document.getElementById('cart-total');
-    const checkoutBtn = document.getElementById('checkout-btn');
-
-    // Cart state
-    let cart = {};
-
-    function renderProducts(category) {
-      productGrid.innerHTML = '';
-      const items = products[category];
-      items.forEach(item => {
-        const productCard = document.createElement('div');
-        productCard.className = 'product-card';
-        productCard.setAttribute('tabindex', '0');
-        productCard.innerHTML = `
-          ${item.bestSeller ? `<div class="badge" aria-label="Best seller">Best Seller</div>` : ''}
-          <img src="${item.image}" alt="${item.name}" />
-          <div class="product-info">
-            <h4>${item.name}</h4>
-            <p>${item.description}</p>
-            <div class="price">NPR ${item.price.toFixed(2)}</div>
-            <button aria-label="Add ${item.name} to cart" data-id="${item.id}" data-category="${category}">Add to Cart</button>
-          </div>
-        `;
-        productGrid.appendChild(productCard);
-      });
+<script>
+  // Sample menu data - replace or fetch dynamically if needed
+  const menu = [
+    {
+      id: 1,
+      name: 'Green Tea',
+      description: 'Refreshing organic green tea.',
+      price: 150,
+      img: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=60'
+    },
+    {
+      id: 2,
+      name: 'Cappuccino',
+      description: 'Creamy espresso with steamed milk foam.',
+      price: 250,
+      img: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=600&q=60'
+    },
+    {
+      id: 3,
+      name: 'Blueberry Muffin',
+      description: 'Freshly baked blueberry muffin.',
+      price: 180,
+      img: 'https://images.unsplash.com/photo-1562440499-64b0735d2908?auto=format&fit=crop&w=600&q=60'
+    },
+    {
+      id: 4,
+      name: 'Espresso',
+      description: 'Strong and bold espresso shot.',
+      price: 120,
+      img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=60'
     }
+  ];
 
-    // Initialize
-    renderProducts('coffee');
+  const menuContainer = document.getElementById('menuItems');
 
-    categoryTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        categoryTabs.forEach(t => {
-          t.classList.remove('active');
-          t.setAttribute('aria-selected', 'false');
-        });
-        tab.classList.add('active');
-        tab.setAttribute('aria-selected', 'true');
-        renderProducts(tab.id.replace('tab-', ''));
-      });
+  function renderMenu() {
+    menuContainer.innerHTML = '';
+    menu.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'menu-card';
+      card.innerHTML = `
+        <img src="${item.img}" alt="${item.name}" />
+        <div class="menu-card-content">
+          <h3>${item.name}</h3>
+          <p>${item.description}</p>
+          <div class="price">NPR ${item.price.toLocaleString()}</div>
+          <button class="add-to-cart-btn" onclick="addToCart(${item.id})">Add to Cart</button>
+        </div>
+      `;
+      menuContainer.appendChild(card);
     });
+  }
 
-    // Add to cart
-    productGrid.addEventListener('click', e => {
-      if (e.target.tagName === 'BUTTON') {
-        const id = e.target.getAttribute('data-id');
-        const category = e.target.getAttribute('data-category');
-        addToCart(category, parseInt(id));
-      }
-    });
+  function addToCart(id) {
+    alert('Added item #' + id + ' to cart! (Functionality to be implemented)');
+    // Here you would add your real cart logic and storage
+  }
 
-    function addToCart(category, id) {
-      const product = products[category].find(p => p.id === id);
-      if (!product) return;
-      if (cart[id]) {
-        cart[id].quantity++;
-      } else {
-        cart[id] = {...product, quantity: 1};
-      }
-      updateCart();
-      openCart();
-    }
+  renderMenu();
+</script>
 
-    function updateCart() {
-      cartContent.innerHTML = '';
-      let total = 0;
-      const keys = Object.keys(cart);
-      if (keys.length === 0) {
-        cartContent.innerHTML = '<p>Your cart is empty.</p>';
-        checkoutBtn.disabled = true;
-        cartTotal.textContent = 'Total: NPR 0';
-        return;
-      }
-      keys.forEach(key => {
-        const item = cart[key];
-        total += item.price * item.quantity;
-        const cartItem = document.createElement('div');
-        cartItem.className = 'cart-item';
-        cartItem.innerHTML = `
-          <div class="cart-item-info">
-            <h5>${item.name}</h5>
-            <small>Qty: ${item.quantity} × NPR ${item.price.toFixed(2)}</small>
-          </div>
-          <div class="cart-item-actions">
-            <button aria-label="Remove one ${item.name} from cart" data-id="${item.id}">&minus;</button>
-            <button aria-label="Remove all ${item.name} from cart" data-id="${item.id}" data-removeall="true">&times;</button>
-          </div>
-        `;
-        cartContent.appendChild(cartItem);
-      });
-      cartTotal.textContent = `Total: NPR ${total.toFixed(2)}`;
-      checkoutBtn.disabled = false;
-    }
-
-    // Cart item buttons
-    cartContent.addEventListener('click', e => {
-      if (e.target.tagName === 'BUTTON') {
-        const id = e.target.getAttribute('data-id');
-        if (e.target.hasAttribute('data-removeall')) {
-          delete cart[id];
-        } else {
-          if (cart[id]) {
-            cart[id].quantity--;
-            if (cart[id].quantity <= 0) {
-              delete cart[id];
-            }
-          }
-        }
-        updateCart();
-      }
-    });
-
-    // Open and close cart
-    function openCart() {
-      cartSidebar.classList.add('open');
-      cartSidebar.setAttribute('aria-hidden', 'false');
-      closeCartBtn.focus();
-    }
-    function closeCart() {
-      cartSidebar.classList.remove('open');
-      cartSidebar.setAttribute('aria-hidden', 'true');
-      cartBtn.focus();
-    }
-
-    cartBtn.addEventListener('click', openCart);
-    closeCartBtn.addEventListener('click', closeCart);
-
-    // Checkout button
-    checkoutBtn.addEventListener('click', () => {
-      alert('Thank you for your order! Total: ' + cartTotal.textContent);
-      cart = {};
-      updateCart();
-      closeCart();
-    });
-
-    // Testimonials slider
-    const testimonials = document.querySelectorAll('.testimonial');
-    const prevTestimonialBtn = document.getElementById('prev-testimonial');
-    const nextTestimonialBtn = document.getElementById('next-testimonial');
-    let currentTestimonial = 0;
-
-    function showTestimonial(index) {
-      testimonials.forEach((t, i) => {
-        t.classList.toggle('active', i === index);
-      });
-    }
-    prevTestimonialBtn.addEventListener('click', () => {
-      currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
-      showTestimonial(currentTestimonial);
-    });
-    nextTestimonialBtn.addEventListener('click', () => {
-      currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-      showTestimonial(currentTestimonial);
-    });
-
-  </script>
 </body>
 </html>
